@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stack Picker</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b5bd6'/%3E%3Cpath d='M8 12l8-4 8 4-8 4z' fill='white'/%3E%3Cpath d='M8 16l8 4 8-4M8 20l8 4 8-4' stroke='white' stroke-width='2' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><path d="M8 12l8-4 8 4-8 4z" class="fill"/><path d="M8 16l8 4 8-4M8 20l8 4 8-4" class="stroke"/></svg>
+      <span>Stack Picker</span>
+    </div>
+    <div id="status" class="status loading" title="">
+      <span class="dot"></span><span id="statusText">Laya is warming up</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>What do you want to build?</h1>
+      <p class="sub">Describe it in plain words. Laya reads your idea and you get the simplest stack that fits.</p>
+
+      <form id="form" class="composer" autocomplete="off">
+        <textarea id="idea" rows="3" maxlength="2000" placeholder="e.g. A tool where my team logs hotel issues and gets a weekly report"></textarea>
+        <div class="composer-row">
+          <div class="field">
+            <span class="label">I know</span>
+            <div id="langs" class="seg" role="radiogroup" aria-label="Languages you know"></div>
+          </div>
+          <button id="go" class="btn" type="submit">
+            <span>Suggest my stack</span><kbd>Ctrl ↵</kbd>
+          </button>
+        </div>
+      </form>
+
+      <div class="examples">
+        <span class="label">Try</span>
+        <div id="examples" class="chips"></div>
+      </div>
+    </section>
+
+    <section id="loading" class="loading-panel" hidden>
+      <div class="pulse"></div>
+      <div>
+        <p class="loading-title">Laya is reading your idea…</p>
+        <p class="muted"><span id="elapsed">0.0</span> s · one forward pass on CPU, usually 5 to 10 s</p>
+      </div>
+    </section>
+
+    <section id="error" class="error-panel" hidden></section>
+
+    <section id="result" class="result" hidden>
+      <aside class="card read">
+        <p class="eyebrow">Laya's read</p>
+        <label class="kind-pick">
+          <select id="kindSelect" aria-label="Type of project"></select>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5l5 5 5-5"/></svg>
+        </label>
+        <p id="kindWhy" class="why-line"></p>
+        <div id="kindAlt" class="chips small"></div>
+
+        <p class="eyebrow mt">Needs</p>
+        <div id="flags" class="flags"></div>
+
+        <p class="eyebrow mt">Who uses it</p>
+        <div id="scale" class="seg full" role="radiogroup" aria-label="Users"></div>
+        <p id="scaleWhy" class="why-line"></p>
+
+        <p class="hint">Something wrong? Click to fix it. The stack updates instantly.</p>
+
+        <details class="raw">
+          <summary>Laya's raw numbers</summary>
+          <div id="raw"></div>
+        </details>
+      </aside>
+
+      <div class="card stack">
+        <div class="stack-head">
+          <div>
+            <p class="eyebrow">Your stack</p>
+            <h2 id="title"></h2>
+          </div>
+          <div id="tags" class="tags"></div>
+        </div>
+        <p id="summary" class="summary"></p>
+        <div id="layers" class="layers"></div>
+
+        <div class="start">
+          <p class="eyebrow">Start here</p>
+          <div class="cmd">
+            <code id="cmd"></code>
+            <button id="copy" class="copy" type="button">Copy</button>
+          </div>
+          <p id="cmdNote" class="muted"></p>
+        </div>
+
+        <p class="alt"><span class="alt-label">Also consider</span><span id="alt"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">Runs locally. Your idea never leaves this machine. Powered by <a href="https://huggingface.co/convaiinnovations/laya" target="_blank" rel="noopener">Laya</a>.</footer>
+
+  <script src="/static/stacks.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
